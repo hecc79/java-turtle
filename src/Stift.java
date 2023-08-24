@@ -24,7 +24,9 @@ import static javax.swing.UIManager.*;
  * Singleton
  *
  * @author hecc79 Christian Hecker
+ * @version 1.1
  */
+@SuppressWarnings("unused")
 public class Stift {
 
     private static Stift stiftInstance;
@@ -80,6 +82,8 @@ public class Stift {
             return panel;
         }
 
+
+        @SuppressWarnings("BusyWait")
         public void warten() {
             while (isVisible()) {
                 try {
@@ -131,6 +135,12 @@ public class Stift {
         farbe = c;
     }
 
+    /**
+     * Privater Konstruktor. Bitte Instanz über Singleton Methode Stift.getStift() erzeugen.
+     * @param x Maximale Pixelzahl Breite
+     * @param y Maximale Pixelzahl Höhe
+     * @param blatt das Zeichenblatt
+     */
     private Stift(double x, double y, Blatt blatt) {
         this.x = x;
         this.y = y;
@@ -144,15 +154,26 @@ public class Stift {
 
     }
 
+
+    /**
+     * Hebt den Stift. Bewegungen hinterlassen ab jetzt keine Zeichenspur.
+     */
     public void heben() {
 
         stiftOben = true;
     }
 
+    /**
+     * Senkt den Stift. Bewegungen hinterlassen ab jetzt eine Zeichenspur.
+     */
     public void senken() {
         stiftOben = false;
     }
 
+    /**
+     * Dreht die Orientierung des Stifts linksherum im Gradmaß
+     * @param winkel Drehwinkel im Gradmaß, linksdrehend
+     */
     public void drehe(double winkel) {
         this.richtung = (richtung + Math.toRadians(-winkel));
     }
@@ -162,6 +183,10 @@ public class Stift {
         return (int) (d + 0.5);
     }
 
+    /**
+     * Bewegt den Stift strecke vor. Wenn der Stift gesenkt ist, wird eine Strecke gezeichnet.
+     * @param strecke Streckenlänge
+     */
     public void vor(double strecke) {
 
         int oldx = getXi();
@@ -171,6 +196,7 @@ public class Stift {
         zeichneLinie(oldx, oldy, getXi(), getYi(), farbe);
     }
 
+    @SuppressWarnings("Convert2Lambda")
     private void zeichneLinie(final int x1, final int y1, final int x2, final int y2, final Color c) {
         if (!stiftOben) SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -181,6 +207,12 @@ public class Stift {
         });
     }
 
+    /**
+     * Gehe zu den Koordinaten (x,y) und zeichne entlang des Weges eine Strecke, wenn der Stift gesenkt ist.
+     * @param x x-Koordinate
+     * @param y y-Koordinate
+     */
+    @SuppressWarnings("unused")
     public void geheZu(double x, double y) {
         int oldx = getXi();
         int oldy = getYi();
@@ -191,6 +223,11 @@ public class Stift {
 
     }
 
+    /**
+     * Bewegt den Stift zu den Koordinaten x,y ohne eine Strecke zu zeichnen.
+     * @param x x-Koordinate
+     * @param y y-Koordinate
+     */
     public void geheZuOhne(double x, double y) {
         this.x = x;
         this.y = y;
@@ -212,11 +249,18 @@ public class Stift {
         return y;
     }
 
+    /**
+     *
+     * @return Gibt die Drehrichtung (linksdrehend) im Gradmaß, 0-rechts, 90-oben, 180-links, 270-unten
+     */
     public double getRichtung() {
         return Math.toDegrees(-richtung);
     }
 
-
+    /**
+     * Setzt die Drehrichtung
+     * @param d Drehrichtung (linksdrehend) im Gradmaß, 0-rechts, 90-oben, 180-links, 270-unten
+     */
     public void setRichtung(double d) {
         richtung = Math.toRadians(-d);
     }
