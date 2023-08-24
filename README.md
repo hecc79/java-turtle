@@ -4,7 +4,35 @@ Eine reduzierte, einfache Java Turtle mit deutschem Interface
 Um mit dem Java-Editor zeichnen zu können, muss die folgende Datei Stidt.java im Arbeitsverzeichnis liegen und übersetzt werden.
 
 ``` java title="Beispiel für das Zeichnen mit der Klasse Stift" linenums="1"
--8<- "Beispiel.java"
+import java.awt.Color;
+
+public class Beispiel {
+  
+  private static Stift stift = Stift.getStift(800, 600); 
+  
+  public static void main(String[] args) {
+    
+    //Bewege den Stift ohne zu zeichnen auf (100|100)
+    //Zeichenrichtung rechts
+    stift.heben();
+    stift.vor(100);
+    stift.drehe(-90);
+    stift.vor(100);
+    stift.drehe(90);
+    stift.senken();
+    
+    //Zeichne ein Dreieck
+    stift.setzeFarbe(Color.blue);
+    stift.vor(100);
+    stift.drehe(-120);
+    stift.setzeFarbe(Color.red);
+    stift.vor(100);
+    stift.drehe(-120);
+    stift.setzeFarbe(Color.green);
+    stift.vor(100);
+    stift.drehe(-120);
+  }
+}
 ```
 
 Die import Anweisung (Zeile 1) ist nötig, um die Farben (s. Zeilen 9, 12, 15) zu spezifizieren.
