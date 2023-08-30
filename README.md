@@ -1,7 +1,7 @@
 # java-turtle
 Eine reduzierte, einfache Java Turtle mit deutschem Interface
 
-Um mit dem Java-Editor zeichnen zu können, muss die folgende Datei Stidt.java im Arbeitsverzeichnis liegen und übersetzt werden.
+Um mit dem Java-Editor zeichnen zu können, muss die folgende Datei Stift.java im Arbeitsverzeichnis liegen und übersetzt werden.
 
 ``` java title="Beispiel für das Zeichnen mit der Klasse Stift" linenums="1"
 import java.awt.Color;

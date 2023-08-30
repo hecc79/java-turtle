@@ -4,7 +4,7 @@ import java.awt.Color;
 
 
 public class Fraktalbaum {
-  private static Stift stift = Stift.getStift(800, 600);
+  private static final Stift stift = Stift.getStift(800, 600);
 
   public static void zeichneBaum0(double laenge) {
     stift.vor(laenge);
